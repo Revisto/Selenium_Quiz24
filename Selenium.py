@@ -5,12 +5,12 @@ from selenium.webdriver.common.keys import Keys
 import selenium
 import time
 import random
-URLs={"903":"url",
-        "902":"url",
-        "901":"url"
-        }
+URLs={
+    "903":"https://www.quiz24.ir/home/JoinToClass?code=holding-244129397",
+    "902":"https://www.quiz24.ir/home/JoinToClass?code=holding-329929818",
+    "901":"https://www.quiz24.ir/home/JoinToClass?code=holding-431666409"}
 Students=[
-"امین الماسی راد",
+    "امین الماسی راد",
     "پارسا طالبی",
     "ماهان رضایی وارسته","ماهان رضایی وارسته","ماهان رضایی وارسته","ماهان رضایی وارسته","ماهان رضایی وارسته"
     "مهدی بدخشان",
@@ -62,19 +62,23 @@ Students=[
     "دانیال پیغمبرزاده","دانیال پیغمبرزاده","دانیال پیغمبرزاده","دانیال پیغمبرزاده","دانیال پیغمبرزاده",
     "بنیامین شفیعی",
     "سعید صباقیان","سعید صباقیان","سعید صباقیان",
-    "شهروز یوسفی","شهروز یوسفی","شهروز یوسفی"
-]
+    "شهروز یوسفی","شهروز یوسفی","شهروز یوسفی"]
 
-WhatsYourDestiny=input("""which Class Do You Wanna Atack 
-901
-or 
-902
-or
-903
-Class : """)
-
+def WhatsYourDestiny(URLs):
+    Num=input("""which Class Do You Wanna Atack 
+    901
+    or 
+    902
+    or
+    903
+    Class : """)
+    if Num in URLs:
+        print (URLs[Num])
+        return URLs[Num]
+    else:
+        WhatsYourDestiny(URLs)
 Texts=[
-"ساعت چنده",
+    "ساعت چنده",
     'درس چندیم؟',
     'اینجا چه کلاسی؟',
     'شما؟',
@@ -125,8 +129,7 @@ Texts=[
     "این دیکه کیه؟",
     "درس خیلی پیچیدست",
     'من نمیفهمم',
-    'متوجه نمیشم'
-]
+    'متوجه نمیشم']
 
 def ReTurnMessage(Texts):
     Word=random.choice(Texts)
@@ -138,21 +141,22 @@ def ReTurnMessage(Texts):
         ReTurnMessage(Texts)
 
 ListDrives=[]
-for i in range(15):
-    Url=URLs[WhatsYourDestiny]
-
+if True:
+    Url=WhatsYourDestiny(URLs)
+    
     for i in range (int(input("How Many Tabs Do You Want To Open : "))):
         Path="/usr/lib/chromium-browser/chromedriver"
         Drive = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
+        print (Url)
         Drive.get(Url)
-
+        
         time.sleep(5)
     
 
         SearchBox = Drive.find_elements_by_class_name("form-control")
 
         SearchBox[0].send_keys(random.choice(Students))
-        SearchBox[0].send_keys(Keys.ENTER)
+        SearchBox[0].send_keys(Keys.ENTER) 
 
         SearchBox[1].send_keys("0912"+str(random.randint(1000000,9999999)))
         SearchBox[1].send_keys(Keys.ENTER)
