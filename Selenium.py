@@ -31,9 +31,3 @@ for i in range (3):
         SearchBox[2].send_keys("1234567")
         SearchBox[2].send_keys(Keys.ENTER)
 
-        time.sleep(10)
-    
-        Drive.find_element_by_class_name("icon-bbb-listen").click()
-
-
-        File.close()  
