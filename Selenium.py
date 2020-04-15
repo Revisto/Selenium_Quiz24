@@ -76,7 +76,7 @@ def WhatsYourDestiny(URLs):
         print (URLs[Num])
         return URLs[Num]
     else:
-        WhatsYourDestiny(URLs)
+        return WhatsYourDestiny(URLs)
 Texts=[
     "ساعت چنده",
     'درس چندیم؟',
@@ -138,7 +138,15 @@ def ReTurnMessage(Texts):
     if a=="y" or a=="Y":
         return Word
     else:
-        ReTurnMessage(Texts)
+        return ReTurnMessage(Texts)
+def ReturnStudent(Texts):
+    Word=random.choice(Texts)
+    print (Word)
+    a=input("'y' for yes , 'n' for no    which:  ")
+    if a=="y" or a=="Y":
+        return Word
+    else:
+        return ReTurnMessage(Texts)
 
 ListDrives=[]
 if True:
@@ -154,8 +162,8 @@ if True:
     
 
         SearchBox = Drive.find_elements_by_class_name("form-control")
-
-        SearchBox[0].send_keys(random.choice(Students))
+        Name=ReturnStudent(Students)
+        SearchBox[0].send_keys(Name)
         SearchBox[0].send_keys(Keys.ENTER) 
 
         SearchBox[1].send_keys("0912"+str(random.randint(1000000,9999999)))
@@ -167,13 +175,20 @@ if True:
         SearchBox[2].send_keys(Keys.ENTER)
 
         time.sleep(5)
-        Drive.find_element_by_xpath("/html/body/div[2]/div/div/div[1]/div/div/span/button[2]/span[1]").click()
-
+        try:
+            Drive.find_element_by_xpath("/html/body/div[2]/div/div/div[1]/div/div/span/button[2]/span[1]").click()
+        except:
+            None
+        a=input("WAit")
+        
         ListDrives.append(Drive)
 
 while True:
     Sentense=ReTurnMessage(Texts)
     DriveRandom=random.choice(ListDrives)
-    Chat=DriveRandom.find_elements_by_class_name("Class Name ChatRoom")
-    Chat.send_keys(Sentense)
-    Chat.send_keys(Keys.ENTER)
+    Chat=DriveRandom.find_element_by_id("message-input")
+    try:
+        Chat.send_keys(Sentense)
+        Chat.send_keys(Keys.ENTER)
+    except:
+        None
