@@ -21,7 +21,7 @@ Visit https://www.quiz24.ir/
 ```
 git clone https://github.com/Revisto/Selenium_Quiz24
 cd Selenium_Quiz24
-python3 selenium.py
+python3 Selenium.py
 ```
      
 Enjoy🤨🤨🤨
